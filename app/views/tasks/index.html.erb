@@ -1,0 +1,27 @@
+<h1 class="mb-4">Task List</h1>
+
+<%= link_to 'New Task', new_task_path, class: 'btn btn-primary mb-3' %>
+
+<div id="tasks-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Completed</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= link_to task.title, task, class: 'btn-task' %></td>
+          <td><%= task.completed ? 'Yes' : 'No' %></td>
+          <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-info' %></td>
+          <td>
+            <%= button_to 'Remove', task, method: :delete, class: 'btn btn-danger', form: { style: 'display:inline;', onsubmit: "return confirm('Are you sure?');" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
